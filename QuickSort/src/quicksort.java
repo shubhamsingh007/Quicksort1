@@ -17,17 +17,20 @@ public class quicksort
 	{
 		int pivot=a[low];
 		int i=low;
-		int j=(high+1);
+		int j=high;
 		
-		while(i<=j)
+		while(i<j)
 		{
-			do {
+			while(a[i]<=pivot && i<high)
+			{
+				
 				i=i+1;
-			}while(a[i]<=pivot && i<high);
+			}
 			
-			do {
+			while(a[j]>=pivot && j>low)
+			{
 				j=j-1;
-			}while(a[j]>=pivot && j>low);
+			}
 			
 			if(i<j)
 			{
@@ -50,23 +53,54 @@ public class quicksort
 	public static void main(String[] args) 
 	{
 		quicksort q=new quicksort();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("enter the value of n");
+		Random ran=new Random();
+		Scanner sc=new Scanner(System.in);
+		float start = 0.0f;
+		float end =0.0f;
+		System.out.println("take value of n");
 		int n=sc.nextInt();
 		int a[]=new int[n];
-		System.out.println("enter the array elements");
-		for(int i=0;i<n;i++)
+		System.out.println("chooice 1.worst case asc 2.avg / best case 3.worst case dsc");
+		int ch=sc.nextInt();
+		switch(ch) 
 		{
-			a[i]=sc.nextInt();
+		case 1:System.out.println("worst case asc order input");
+				for(int i=0;i<n;i++)
+				{
+					a[i]=i;
+					
+				}
+				break;
+		case 2:System.out.println("avg and best case");
+				
+				for(int i=0;i<n;i++)
+				{
+					a[i]=ran.nextInt();
+				}
+				break;
+		case 3:System.out.println("worst case dsc order input");
+				for(int i=0;i<n;i++)
+				{
+					a[i]=n-i;
+				}
+				break;
 		}
-		q.Quicksort(a,0,(n-1));
 		
-		System.out.println(" the sorted array is=");
-		for(int i=0;i<n;i++)
-		{
-			System.out.print(" "+a[i]);
-		}
-		sc.close();
+		start =System.nanoTime();
+				q.Quicksort(a,0,(n-1));
+				end=System.nanoTime();
+				
+				float time1=start;
+				float time2=end;
+				float time=end-start;
+				System.out.println(" ");
+				System.out.println("start= " + (time1/1000000000)+"sec");
+				System.out.println("end= "+ (time2/1000000000)+"sec");
+				System.out.print("time=");
+				System.out.println(time/1000000000+ "sec");
+				sc.close();
+
+		
 
 	}
 
